@@ -27,6 +27,9 @@ product_groups_priority = {'body': 1,
                            'hair': 3}
 
 
+
+orderline_lists = [list(lst) for lst in orderline]
+
 def data_prepartion(orderline, products_dict, product_groups_priority):
     """
     Basic data preparation for more advanced processing.
@@ -35,7 +38,7 @@ def data_prepartion(orderline, products_dict, product_groups_priority):
 
     data = []  # main list
 
-    for lst in ord_num:
+    for lst in orderline_lists:
         for ind, item in enumerate(lst):
             if ind == 1:  # selecting product_id
                 lst[ind] = products_dict.get(item, item)  # assign dict values
@@ -59,7 +62,7 @@ def add_group_power():
     1 --> 3, 2 --> 2, 3 --> 1 [priority --> strength]
     """
 
-    data = data_prepartion(orderline, products_dict, product_groups_priority)
+    data = data_prepartion(orderline_lists, products_dict, product_groups_priority)
     orders = []
 
     for lst in data:
@@ -104,5 +107,6 @@ def results():
     return result
 
 
-print(results())
+if __name__ == '__main__':
+    print(results())
 
